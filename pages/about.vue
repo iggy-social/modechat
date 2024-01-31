@@ -35,7 +35,8 @@
       <h5>Useful links</h5>
 
       <ul>
-        <li><a href="https://github.com/iggy-social/modechat" target="_blank">ModeChat GitHub</a></li>
+        <li><a href="https://github.com/iggy-social/modechat" target="_blank">GitHub: ModeChat frontend</a></li>
+        <li><a href="https://github.com/iggy-social/modechat-contracts" target="_blank">GitHub: ModeChat smart contracts</a></li>
         <li><a href="https://discord.gg/8dSrwrAQeu" target="_blank">Discord</a></li>
       </ul>
 
@@ -53,6 +54,18 @@
         <li><a href="https://iggy.social/" target="_blank">Iggy Social</a></li>
         <li>... and others.</li>
       </ul>
+
+      <h5>Can anyone run a frontend?</h5>
+
+      <p class="text-break mt-3">
+        Yes! The frontend code is open source and available on GitHub. Anyone can run their own instance of ModeChat on their own 
+        server (and domain), and it will show the exact same content as this chat (same posts and replies). 
+      </p>
+
+      <p class="text-break mt-3">
+        This web app is a pure frontend app and does not rely on any web2 backend. Posts are stored on IPFS (via Ceramic/Orbis), 
+        and all the blockchain interactions are done on the Mode network.
+      </p>
 
       <hr />
 
