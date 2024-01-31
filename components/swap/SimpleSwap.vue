@@ -294,8 +294,14 @@ export default {
           return 0;
         } else if (this.inputTokenBalance > 100) {
           return Number(this.inputTokenBalance).toFixed(2);
-        } else {
+        } else if (this.inputTokenBalance > 1) {
           return Number(this.inputTokenBalance).toFixed(4);
+        } else if (this.inputTokenBalance > 0.01) {
+          return Number(this.inputTokenBalance).toFixed(6);
+        } else if (this.inputTokenBalance > 0.0001) {
+          return Number(this.inputTokenBalance).toFixed(8);
+        } else {
+          return Number(this.inputTokenBalance).toFixed(10);
         }
       }
 
