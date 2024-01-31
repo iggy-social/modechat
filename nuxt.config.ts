@@ -53,7 +53,7 @@ export default defineNuxtConfig({
       activityPointsAddress: "",
       airdropApAddress: "", // chat token claim for APs
       airdropClaimDomainsAddress: "", // chat token claim for domain holders
-      blockExplorerBaseUrl: "",
+      blockExplorerBaseUrl: "https://sepolia.explorer.mode.network", // no trailing slash!
       chatChannels: { // go to Orbis Dashboard (https://useorbis.com/dashboard), create a new Project and then create a new Context for each of the channels below
         "general": "kjzl6cwe1jw14anfen1dc5341ku30h2vq0bm593yqhrrnefn96diezzm71d09fc", // general discussion channel
         "memesImages": "kjzl6cwe1jw14baa970et2v1t5dow17o99i86l7a731pvbz8n1ncakq02e1j80z",
