@@ -105,7 +105,7 @@ export default defineNuxtConfig({
       profileMintedPostIdsMax: 36, // max number of minted post ids to show in the profile page
       projectMetadataTitle: "ModeChat | Web3 Social on Mode Network",
       projectName: "ModeChat",
-      projectDescription: "ModeChat is the first decentralized social network on Mode L2 chain.",
+      projectDescription: "Web3 Social is here. ModeChat is the first decentralized social network on the Mode L2 chain.",
       projectTwitter: "https://twitter.com/iggysocial",
       projectUrl: "https://modechat.xyz", // without trailing slash!
       punkMinterAddress: "0x63f8691b048e68E1C3d6E135aDc81291A9bb1987", // punk domain minter contract address
