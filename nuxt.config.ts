@@ -64,7 +64,7 @@ export default defineNuxtConfig({
       chatTokenAddress: "", // chat token address
       chatTokenImage: "", // chat token image
       chatTokenSymbol: "MCHAT", // chat token symbol or name
-      domainRequiredToPost: true,
+      domainRequiredToPost: false,
       expiryCollections: 1000 * 60 * 60 * 24 * 7, // must be in milliseconds (0 means no expiration)
       expiryUsernames: 1000 * 60 * 60 * 24 * 7, // must be in milliseconds (0 means no expiration)
       favicon: "/img/favicon.svg",
