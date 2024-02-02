@@ -8,7 +8,7 @@ export default defineNuxtPlugin(() => {
     if (chainId === 919) {
       return "Mode Testnet";
     } else if (chainId === 34443) {
-      return "Mode Mainnet";
+      return "Mode";
     }
   }
 
@@ -50,7 +50,7 @@ export default defineNuxtPlugin(() => {
         nativeCurrency: { decimals: 18, name: "ETH", symbol: "ETH" }, 
         rpcUrls: [getRpcs2()[networkId]]
       }] 
-    } else if (networkName == "Mode Network") {
+    } else if (networkName == "Mode") {
       networkId = 34443;
       method = "wallet_addEthereumChain"
       params = [{ 
