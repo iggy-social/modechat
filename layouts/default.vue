@@ -429,10 +429,17 @@ export default {
         if (this.referrer.includes(this.$config.tldName)) {
           // get the domain name without extension
           domainName = this.referrer.split(".")[0];
-        }
 
-        // fetch the domain holder address
-        this.referrer = await this.getDomainHolder(domainName);
+          // fetch the domain holder address
+          this.referrer = await this.getDomainHolder(domainName);
+        } else if (this.referrer.includes(this.$config.altDomain)) {
+          // get the domain name without alt domain extension
+          domainName = this.referrer.split(".")[0];
+
+          // fetch the alt domain holder address
+          this.referrer = await getAltDomainHolder(domainName);
+        }
+        
       }
 
       if (this.address) {
