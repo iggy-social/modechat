@@ -207,8 +207,8 @@ import ChangeCollectionPreviewModal from "~/components/nft/collection/ChangeColl
 import ChangeDescriptionModal from "~/components/nft/collection/ChangeDescriptionModal";
 import ChangeNftTypeModal from "~/components/nft/collection/ChangeNftTypeModal";
 import RemoveImageFromCollectionModal from "~/components/nft/collection/RemoveImageFromCollectionModal";
-import { getDomainName } from '~/utils/domainUtils';
-import { fetchCollection, fetchUsername, storeCollection, storeUsername } from '~/utils/storageUtils';
+import { getAltDomainName, getDomainName } from '~/utils/domainUtils';
+import { fetchCollection, fetchUsername, storeAltname, storeCollection, storeUsername } from '~/utils/storageUtils';
 import { getTextWithoutBlankCharacters } from '~/utils/textUtils';
 
 export default {
@@ -380,6 +380,9 @@ export default {
         if (userDomain) {
           this.cAuthorDomain = userDomain;
           storeUsername(window, this.cAuthorAddress, userDomain+this.$config.tldName);
+        } else {
+          this.cAuthorDomain = await getAltDomainName(this.cAuthorAddress);
+          storeAltname(window, this.cAuthorAddress, this.cAuthorDomain);
         }
       }
     },

@@ -51,8 +51,8 @@ import { ethers } from 'ethers';
 import { useToast } from "vue-toastification/dist/index.mjs";
 import WaitingToast from "~/components/WaitingToast";
 import { useUserStore } from '~/store/user';
-import { getDomainName } from '~/utils/domainUtils';
-import { storeUsername } from '~/utils/storageUtils';
+import { getAltDomainName, getDomainName } from '~/utils/domainUtils';
+import { storeAltname, storeUsername } from '~/utils/storageUtils';
 
 export default {
   name: 'ChangeUsernameModal',
@@ -232,6 +232,13 @@ export default {
           this.userStore.setDefaultDomain(userDomain+this.$config.tldName);
           storeUsername(window, this.address, userDomain+this.$config.tldName);
         } else {
+          userDomain = await getAltDomainName(this.address);
+          this.userStore.setDefaultDomain(null);
+          this.userStore.setAltName(userDomain);
+          storeAltname(window, this.address, userDomain);
+        } 
+
+        if (!this.authorDomain) {
           this.userStore.setDefaultDomain(null);
         }
       }

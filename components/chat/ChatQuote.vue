@@ -49,8 +49,8 @@ import sanitizeHtml from 'sanitize-html';
 import { useEthers, shortenAddress } from 'vue-dapp';
 import { useUserStore } from '~/store/user';
 import ProfileImage from "~/components/profile/ProfileImage.vue";
-import { getDomainName } from '~/utils/domainUtils';
-import { fetchUsername, storeUsername } from '~/utils/storageUtils';
+import { getAltDomainName, getDomainName } from '~/utils/domainUtils';
+import { fetchUsername, storeAltname, storeUsername } from '~/utils/storageUtils';
 import { getTextWithoutBlankCharacters, imgParsing, imgWithoutExtensionParsing, urlParsing, youtubeParsing } from '~/utils/textUtils';
 
 export default {
@@ -134,7 +134,10 @@ export default {
           if (domainName) {
             this.authorDomain = domainName + this.$config.tldName;
             storeUsername(window, this.authorAddress, this.authorDomain);
-          } 
+          } else {
+            this.authorDomain = await getAltDomainName(this.authorAddress);
+            storeAltname(window, this.authorAddress, this.authorDomain);
+          }
         }
       }
     },

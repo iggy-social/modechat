@@ -178,12 +178,12 @@ import ProfileImage from "~/components/profile/ProfileImage.vue";
 import IggyPostMint from "~/components/minted-posts/IggyPostMint.vue";
 import MintedPostImage from '~/components/minted-posts/MintedPostImage.vue';
 import ChatQuote from "~/components/chat/ChatQuote.vue";
-import { getDomainName } from '~/utils/domainUtils';
+import { getAltDomainName, getDomainName } from '~/utils/domainUtils';
 import { 
   getTextWithoutBlankCharacters, findFirstCollectionUrl, findFirstUrl, imgParsing, imgWithoutExtensionParsing, urlParsing, 
   youtubeParsing 
 } from '~/utils/textUtils';
-import { fetchCollection, fetchUsername, storeCollection, storeUsername } from '~/utils/storageUtils';
+import { fetchCollection, fetchUsername, storeAltname, storeCollection, storeUsername } from '~/utils/storageUtils';
 
 export default {
   name: "ChatPost",
@@ -460,7 +460,10 @@ export default {
           if (domainName) {
             this.authorDomain = domainName + this.$config.tldName;
             storeUsername(window, this.authorAddress, this.authorDomain);
-          } 
+          } else {
+            this.authorDomain = await getAltDomainName(this.authorAddress);
+            storeAltname(window, this.authorAddress, this.authorDomain);
+          }
         }
       }
     },
