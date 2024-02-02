@@ -117,6 +117,7 @@ import { ethers } from 'ethers';
 import { useEthers } from 'vue-dapp';
 import { useToast } from "vue-toastification/dist/index.mjs";
 import { getTokenBalance } from '~/utils/balanceUtils';
+import { getAltDomainHolder, getDomainHolder } from '~/utils/domainUtils';
 import { hasTextBlankCharacters } from '~/utils/textUtils';
 import WaitingToast from "~/components/WaitingToast";
 import ConnectWalletButton from '~/components/ConnectWalletButton.vue';
@@ -207,23 +208,14 @@ export default {
         if (ethers.utils.isAddress(recipient)) {
           this.recipientAddress = recipient;
         } else {
-          const domainName = String(recipient).trim().toLowerCase().replace(this.$config.tldName, "");
+          const domainName = String(recipient).trim().toLowerCase().split(".")[0];
+          const tldName = "."+String(recipient).trim().toLowerCase().split(".")[1];
 
-          // fetch provider from hardcoded RPCs
-          let provider = this.$getFallbackProvider(this.$config.supportedChainId);
-
-          if (this.isActivated && this.chainId === this.$config.supportedChainId) {
-            // fetch provider from user's MetaMask
-            provider = this.signer;
+          if (tldName == this.$config.tldName) {
+            this.recipientAddress = await getDomainHolder(domainName, this.signer);
+          } else if (tldName == this.$config.altDomain) {
+            this.recipientAddress = await getAltDomainHolder(domainName);
           }
-
-          const tldInterface = new ethers.utils.Interface([
-            "function getDomainHolder(string) view returns (address)"
-          ]);
-
-          const tldContract = new ethers.Contract(this.$config.punkTldAddress, tldInterface, provider);
-
-          this.recipientAddress = await tldContract.getDomainHolder(domainName);
         }
       }
     },
@@ -241,7 +233,13 @@ export default {
       // if recipient includes a dot, check if it ends with tldName. If not, throw error via toast
       if (this.inputReceiver.includes(".")) {
         if (!this.inputReceiver.endsWith(this.$config.tldName)) {
-          return this.toast.error("Invalid domain name. Only " + this.$config.tldName + " domains are supported.");
+          if (!this.$config.altDomain) {
+            return this.toast.error("Invalid domain name. Only " + this.$config.tldName + " domains are supported.");
+          }
+
+          if (this.$config.altDomain && !this.inputReceiver.endsWith(this.$config.altDomain)) {
+            return this.toast.error("Invalid domain name. Only " + this.$config.tldName + " and " + this.$config.altDomain + " domains are supported.");
+          }
         }
       }
 
@@ -250,9 +248,9 @@ export default {
       await this.processRecipient(this.inputReceiver);
 
       // prevent sending to 0x0 address
-      if (this.recipientAddress == ethers.constants.AddressZero) {
+      if (this.recipientAddress == ethers.constants.AddressZero || this.recipientAddress == null) {
         this.waiting = false;
-        return this.toast.error("This domain name does not exist");
+        return this.toast.error("This domain name does not exist, or something went wrong with fetching the domain holder address.");
       }
 
       // check if sending native coin or ERC-20 token

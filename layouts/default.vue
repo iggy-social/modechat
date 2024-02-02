@@ -147,9 +147,9 @@ import SidebarLeft from "~/components/sidebars/SidebarLeft.vue";
 import SidebarRight from "~/components/sidebars/SidebarRight.vue";
 import ChatSettingsModal from "~/components/ChatSettingsModal.vue";
 import { getActivityPoints } from '~/utils/balanceUtils';
-import { getDomainHolder, getDomainName } from '~/utils/domainUtils';
+import { getAltDomainName, getDomainHolder, getDomainName } from '~/utils/domainUtils';
 import { getRpcs } from "~/utils/rpcUtils";
-import { storeReferrer, storeUsername } from '~/utils/storageUtils';
+import { storeAltname, storeReferrer, storeUsername } from '~/utils/storageUtils';
 import VerifyAccountOwnership from '~/components/VerifyAccountOwnership.vue';
 import ReferralModal from '~/components/referrals/ReferralModal.vue';
 import ChangeUsernameModal from '~/components/names/ChangeUsernameModal.vue';
@@ -258,6 +258,7 @@ export default {
 
   methods: {
     getActivityPoints,
+    getAltDomainName,
     getDomainHolder,
     getDomainName, // imported function from utils/domainUtils.js
 
@@ -376,13 +377,21 @@ export default {
           userDomain = await this.getDomainName(this.address);
         }
 
-        
-
         if (userDomain) {
           this.userStore.setDefaultDomain(userDomain+this.$config.tldName);
           storeUsername(window, this.address, userDomain+this.$config.tldName);
         } else {
           this.userStore.setDefaultDomain(null);
+        }
+
+        // get alt domain
+        const altDomain = await this.getAltDomainName(this.address);
+        
+        if (altDomain) {
+          this.userStore.setAltName(altDomain);
+          storeAltname(window, this.address, altDomain);
+        } else {
+          this.userStore.setAltName(null);
         }
 
         this.fetchActivityPoints();

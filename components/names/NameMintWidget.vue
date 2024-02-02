@@ -50,7 +50,7 @@ import WaitingToast from "~/components/WaitingToast";
 import ConnectWalletButton from "~/components/ConnectWalletButton";
 import { useUserStore } from '~/store/user';
 import { getDomainName } from '~/utils/domainUtils';
-import { fetchReferrer, fetchUsername, storeUsername } from '~/utils/storageUtils';
+import { fetchReferrer, storeUsername } from '~/utils/storageUtils';
 
 export default {
   name: 'NameMintWidget',

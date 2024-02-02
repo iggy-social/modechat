@@ -257,8 +257,8 @@ import FileUploadModal from "~/components/storage/FileUploadModal.vue";
 import UserMintedPosts from "~/components/minted-posts/UserMintedPosts.vue";
 import ChatFeed from '../chat/ChatFeed.vue';
 import { getActivityPoints } from '~/utils/balanceUtils';
-import { getDomainName, getDomainHolder } from '~/utils/domainUtils';
-import { fetchUsername, storeUsername } from '~/utils/storageUtils';
+import { getAltDomainName, getDomainName, getDomainHolder } from '~/utils/domainUtils';
+import { fetchUsername, storeAltname, storeUsername } from '~/utils/storageUtils';
 import { getTextWithoutBlankCharacters } from '~/utils/textUtils';
 
 export default {
@@ -493,20 +493,38 @@ export default {
         if (domainName) {
           this.domain = domainName + this.$config.tldName;
           storeUsername(window, this.uAddress, this.domain);
-        } 
+        } else {
+          this.domain = await getAltDomainName(this.uAddress);
+          storeAltname(window, this.uAddress, this.domain);
+        }
       }
 
       if (this.domain && !this.uAddress) {
-        const domainHolder = await getDomainHolder(
-          String(this.domain).toLowerCase().split(".")[0],
-          provider
-        );
+        const domainExtension = String(this.domain).toLowerCase().split(".")[1];
 
-        if (domainHolder !== ethers.constants.AddressZero) {
+        let domainHolder;
+
+        if (domainExtension == this.$config.tldName.replace(".", "")) {
+          domainHolder = await getDomainHolder(
+            String(this.domain).toLowerCase().split(".")[0],
+            provider
+          );
+        } else if (domainExtension == this.$config.altDomain.replace(".", "")) {
+          domainHolder = await getAltDomainHolder(
+            String(this.domain).toLowerCase().split(".")[0]
+          );
+        }
+
+        if (domainHolder !== ethers.constants.AddressZero && domainHolder != null) {
           this.uAddress = domainHolder;
         }
 
-        storeUsername(window, this.uAddress, this.domain);
+        if (String(this.domain).toLowerCase().split(".")[1] == this.$config.tldName.replace(".", "")) {
+          storeUsername(window, this.uAddress, this.domain);
+        } else if (String(this.domain).toLowerCase().split(".")[1] == this.$config.altDomain.replace(".", "")) {
+          storeAltname(window, this.uAddress, this.domain);
+        }
+        
       }
 
       await this.fetchOrbisProfile();

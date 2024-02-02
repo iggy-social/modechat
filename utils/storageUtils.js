@@ -1,8 +1,44 @@
 import { ethers } from 'ethers';
 
 const usernameExtension = "-username";
+const altnameExtension = "-altname";
 const collectionExtension = "-collection";
 const referrerKey = "referrer";
+
+export function fetchAltname(window, userAddress) {
+  if (!window) {
+    console.log("No window object in fetchAltname");
+    return null;
+  }
+
+  try {
+    const config = useRuntimeConfig();
+    const expiration = config.expiryUsernames; // in milliseconds
+    const currentTime = new Date().getTime();
+
+    const altnameObjectString = window.localStorage.getItem(String(userAddress).toLowerCase()+altnameExtension);
+
+    if (!altnameObjectString) {
+      return null;
+    }
+
+    const altnameObject = JSON.parse(altnameObjectString);
+
+    // check if username is expired (expiration = 0 means never expire)
+    if (expiration != 0 && (altnameObject.stored + expiration < currentTime)) {
+      return null;
+    }
+
+    if (altnameObject.username) {
+      return altnameObject.username;
+    }
+    
+    return null;
+  } catch (error) {
+    console.log(error);
+    return null;
+  }
+}
 
 export function fetchCollection(window, cAddress) {
   if (!window) {
@@ -39,33 +75,7 @@ export function fetchCollection(window, cAddress) {
   }
 }
 
-export function fetchReferrer(window) {
-  if (!window) {
-    console.log("No window object in fetchReferrer");
-    return ethers.constants.AddressZero;
-  }
-
-  try {
-    const referrerAddress = window.localStorage.getItem(referrerKey);
-
-    if (!referrerAddress) {
-      return ethers.constants.AddressZero;
-    }
-
-    // if not a valid address, return 0x0
-    if (!ethers.utils.isAddress(referrerAddress)) {
-      return ethers.constants.AddressZero;
-    }
-
-    return referrerAddress;
-  } catch (error) {
-    console.log(error);
-    return ethers.constants.AddressZero;
-  }
-
-}
-
-export function fetchUsername(window, userAddress) {
+export function fetchNativeName(window, userAddress) {
   if (!window) {
     console.log("No window object in fetchUsername");
     return null;
@@ -98,6 +108,60 @@ export function fetchUsername(window, userAddress) {
     console.log(error);
     return null;
   }
+}
+
+export function fetchReferrer(window) {
+  if (!window) {
+    console.log("No window object in fetchReferrer");
+    return ethers.constants.AddressZero;
+  }
+
+  try {
+    const referrerAddress = window.localStorage.getItem(referrerKey);
+
+    if (!referrerAddress) {
+      return ethers.constants.AddressZero;
+    }
+
+    // if not a valid address, return 0x0
+    if (!ethers.utils.isAddress(referrerAddress)) {
+      return ethers.constants.AddressZero;
+    }
+
+    return referrerAddress;
+  } catch (error) {
+    console.log(error);
+    return ethers.constants.AddressZero;
+  }
+
+}
+
+export function fetchUsername(window, userAddress) {
+
+  const username = fetchNativeName(window, userAddress);
+
+  if (username) {
+    return username;
+  }
+
+  return fetchAltname(window, userAddress);
+
+}
+
+export function storeAltname(window, userAddress, username) {
+  if (!window) {
+    console.log("No window object in storeAltname");
+    return null;
+  }
+
+  const timestamp = new Date().getTime();
+
+  const altnameObject = {
+    username: username,
+    stored: timestamp
+  }
+
+  window.localStorage.setItem(String(userAddress).toLowerCase()+altnameExtension, JSON.stringify(altnameObject));
 }
 
 export function storeCollection(window, cAddress, collectionObject) {

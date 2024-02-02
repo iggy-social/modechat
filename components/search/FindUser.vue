@@ -4,12 +4,11 @@
       <input 
         type="text" 
         class="form-control text-end" 
-        placeholder="enter name" 
+        placeholder="Enter full domain name" 
         aria-describedby="find-user"
         v-model="domainName"
         v-on:keyup.enter="redirectToProfile"
       >
-      <span class="input-group-text" id="find-user">{{$config.tldName}}</span>
     </div>
 
     <p v-if="domainNotValid.invalid && domainNotValid.message" class="text-danger">
@@ -43,8 +42,8 @@ export default {
         return {invalid: true, message: null};
       } else if (this.domainName === null) {
         return {invalid: true, message: null};
-      } else if (this.domainName.includes(".")) {
-        return {invalid: true, message: "Dots not allowed"};
+      } else if (!this.domainName.includes(".")) {
+        return {invalid: true, message: "Add a domain extension "+this.$config.tldName+" or "+this.$config.altDomain+" to the domain name."};
       } else if (this.domainName.includes(" ")) {
         return {invalid: true, message: "Spaces not allowed"};
       } else if (this.domainName.includes("%")) {
@@ -132,7 +131,7 @@ export default {
 
   methods: {
     redirectToProfile() {
-      this.$router.push({ path: '/profile', query: { id: this.domainName + this.$config.tldName } });
+      this.$router.push({ path: '/profile', query: { id: this.domainName } });
       this.$emit("closeModal");
     }
   }

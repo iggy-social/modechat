@@ -8,6 +8,7 @@ export const useUserStore = defineStore({
     return {
       activityPoints: 0, // not in wei
       address: null,
+      altName: null, // alternative domain name, e.g. .eth, .crypto, etc.
       chatTokenBalanceWei: BigInt(0),
       defaultDomain: null,
       did: null,
@@ -23,6 +24,10 @@ export const useUserStore = defineStore({
   },
 
   getters: {
+    getAltName(state) {
+      return state.altName;
+    },
+
     getCurentUserActivityPoints(state) {
       return state.activityPoints;
     },
@@ -44,7 +49,13 @@ export const useUserStore = defineStore({
     },
 
     getDefaultDomain(state) {
-      return state.defaultDomain;
+      if (state.defaultDomain) {
+        return state.defaultDomain;
+      } else if (state.altName) {
+        return state.altName;
+      }
+
+      return null;
     },
 
     getDid(state) {
@@ -95,6 +106,10 @@ export const useUserStore = defineStore({
 
     addToStakeTokenBalanceWei(balance: ethers.BigNumber) {
       this.stakeTokenBalanceWei += balance.toBigInt();
+    },
+
+    setAltName(name: any) {
+      this.altName = name;
     },
 
     setChatTokenBalanceWei(balance: ethers.BigNumber) {
