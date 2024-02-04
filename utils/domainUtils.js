@@ -1,4 +1,7 @@
 import { ethers } from "ethers";
+import { createWeb3Name } from '@web3-name-sdk/core';
+
+const web3name = createWeb3Name();
 
 export async function getAltDomainHolder(domainName) {
   const config = useRuntimeConfig();
@@ -9,35 +12,10 @@ export async function getAltDomainHolder(domainName) {
     fullDomainName = fullDomainName + config.altDomain;
   }
 
-  const altDomainWithoutDot = config.altDomain.replace(".", "");
+  const address = await web3name.getAddress(domainName);
 
-  // Example: https://api.prd.space.id/v1/getAddress?tld=eth&name=tempetechie.eth
-  const url = `https://api.prd.space.id/v1/getAddress?tld=${altDomainWithoutDot}&name=${fullDomainName}`;
-
-  try {
-    const resp = await $fetch(url).catch((error) => error.data);
-
-    let response = resp;
-
-    if (typeof(resp) === "string") {
-      response = JSON.parse(resp);
-    }
-
-    if (response?.error) {
-      console.log("Error fetching alt domain holder: ", response["error"]);
-      return null;
-    }
-
-    if (response?.code == 1) {
-      console.log("Error fetching alt domain:", response["msg"]);
-      return null;
-    } else if (response?.code == 0) {
-      console.log("Alt domain holder:", response["address"]);
-      return response["address"];
-    }
-    
-  } catch (e) {
-    console.log("Error fetching alternative domain holder: ", e);
+  if (address && address !== ethers.constants.AddressZero) {
+    return address;
   }
 
   return null;
@@ -47,33 +25,13 @@ export async function getAltDomainName(userAddress) {
   const config = useRuntimeConfig();
   const altDomain = config.altDomain.replace(".", "");
 
-  // Example: https://api.prd.space.id/v1/getName?tld=eth&address=0xb29050965A5AC70ab487aa47546cdCBc97dAE45D
-  const url = `https://api.prd.space.id/v1/getName?tld=${altDomain}&address=${userAddress}`;
+  const name = await web3name.getDomainName({
+    address: String(userAddress),
+    queryTldList: [altDomain],
+  })
 
-  try {
-    const resp = await $fetch(url).catch((error) => error.data);
-
-    let response = resp;
-
-    if (typeof(resp) === "string") {
-      response = JSON.parse(resp);
-    }
-
-    if (response?.error) {
-      console.log("Error fetching alt domain: ", response["error"]);
-      return null;
-    }
-
-    if (response?.code == 1) {
-      console.log("Error fetching alt domain:", response["msg"]);
-      return null;
-    } else if (response?.code == 0) {
-      console.log("Alt domain name:", response["name"]);
-      return response["name"];
-    }
-    
-  } catch (e) {
-    console.log("Error fetching alternative domain name: ", e);
+  if (name) {
+    return name;
   }
 
   return null;

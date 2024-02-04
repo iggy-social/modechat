@@ -53,7 +53,7 @@ export default defineNuxtConfig({
       activityPointsAddress: "0xce314209aB485bE222CE85F653Ac918f54532503",
       airdropApAddress: "", // chat token claim for APs
       airdropClaimDomainsAddress: "", // chat token claim for domain holders
-      altDomain: ".eth", // alternative domain (e.g. .eth, .crypto, etc.)
+      altDomain: ".mode", // alternative domain (e.g. .eth, .crypto, etc.)
       blockExplorerBaseUrl: "https://explorer.mode.network", // no trailing slash!
       chatChannels: { // go to Orbis Dashboard (https://useorbis.com/dashboard), create a new Project and then create a new Context for each of the channels below
         "general": "kjzl6cwe1jw149v2ugvw3kux2bllw3bka0vl2rzgmdkaceg3srm62nww7iuvkwi", // general discussion channel
