@@ -12,7 +12,7 @@ export async function getAltDomainHolder(domainName) {
     fullDomainName = fullDomainName + config.altDomain;
   }
 
-  const address = await web3name.getAddress(domainName);
+  const address = await web3name.getAddress(fullDomainName);
 
   if (address && address !== ethers.constants.AddressZero) {
     return address;
