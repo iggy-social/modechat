@@ -39,7 +39,7 @@
           </li>
           <li>
             <a class="text-decoration-none" target="_blank" :href="$config.marketplacePostNftItemUrl+getQueryId">
-              See it on NFT marketplace 
+              See the NFT in the block explorer
               <i class="bi bi-box-arrow-up-right"></i>
             </a>
           </li>
