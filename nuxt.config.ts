@@ -134,7 +134,7 @@ export default defineNuxtConfig({
       stakeTokenSymbol: "MCG", // stake token symbol (governance token symbol)
       supportedChainId: 34443,
       swapPriceImpactMaxBps: 1000, // max price impact in bips (1 bps = 0.01%, 1000bps = 10%) for the swap function
-      swapRouterAddress: "", // iggy swap router contract address
+      swapRouterAddress: "0x4A82158ff4B0504F3DB4c7555FfB6298452985E2", // iggy swap router contract address
       tenorApiKey: process.env.TENOR_KEY || "",
       tldName: ".modechat",
       tokenAddress: null, // leave null if it's a native token of the chain
