@@ -122,7 +122,7 @@ export default defineNuxtConfig({
         "newsletter": false, 
         "nftLaunchpad": false, 
         "randomMintedPosts": true, 
-        "swap": false, 
+        "swap": true, 
         "stake": false, 
         "sendTokens": true, 
         "spotify": false

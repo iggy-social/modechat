@@ -22,6 +22,14 @@
         </div>
       </div>
 
+      <!-- Swap tokens -->
+      <SimpleSwapWidget 
+        v-if="$config.swapRouterAddress && $config.showFeatures.swap" 
+        :routerAddress="$config.swapRouterAddress" 
+        :tokens="tokens"
+        poweredBy="SupSwap" 
+        title="Swap tokens" />
+
       <!-- Referrals -->
       <ReferralWidget />
 
@@ -36,13 +44,6 @@
       <!-- Keys list 
       <KeysListWidget v-if="$config.keysAddress && $config.showFeatures.friendKeys" />
       -->
-
-      <!-- Swap tokens -->
-      <SimpleSwapWidget 
-        v-if="$config.swapRouterAddress && $config.showFeatures.swap" 
-        :routerAddress="$config.swapRouterAddress" 
-        :tokens="tokens" 
-        title="Swap tokens" />
 
       <!-- Random minted post(s) -->
       <MintedPostsWidget v-if="$config.showFeatures.randomMintedPosts" @closeRightSidebar="closeRightSidebar" />

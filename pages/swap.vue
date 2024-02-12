@@ -18,6 +18,7 @@
             <SimpleSwap 
               :routerAddress="$config.swapRouterAddress" 
               swapId="SwapPage1" 
+              poweredBy="SupSwap"
               :tokens="tokens"
             />
           </div>
