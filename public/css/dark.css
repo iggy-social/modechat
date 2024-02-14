@@ -1,4 +1,11 @@
 [data-bs-theme=dark] {
+  --bs-primary: #DFFE00 !important; /* TODO: Replace is with your primary color */
+  --bs-primary-rgb: 223, 254, 0; /* TODO: This should be an RGB version of --bs-primary hex color */
+  --bs-btn-disabled-border-color: #dffe00; /* TODO: Replace is with your primary color */
+  --bs-link-color: #DFFE00; /* TODO: Replace is with your primary color */
+  --bs-nav-pills-link-active-bg: #DFFE00 !important; /* TODO: Replace is with your primary color */
+  --bs-link-color: #DFFE00; /* TODO: Replace is with your primary color */
+  --bs-link-hover-color: #8fa108; /* TODO: A slightly darker shade of the primary color */
   --bs-light: #2a2c31;
   --bs-gray-200: #464950;
   --bs-gray-300: #5f5f68;
