@@ -128,7 +128,7 @@ export default defineNuxtConfig({
         "spotify": false
       }, 
       showRepliesOnHomepage: true, // show replies on the homepage  
-      sidebarLeftSticky: true, // make the left sidebar sticky (always visible)
+      sidebarLeftSticky: false, // make the left sidebar sticky (always visible)
       spotifyPlaylistId: "5y7f2Wxfq49G5KuNQfMPbk", // enter just the ID of the playlist (not the full URL)  
       stakingContractAddress: "", // this is also the stake/gov token address
       stakeTokenSymbol: "MCG", // stake token symbol (governance token symbol)
