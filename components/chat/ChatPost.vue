@@ -17,7 +17,7 @@
       <!-- post author and timestamp -->
       <p class="card-subtitle mb-2 text-muted">
         <NuxtLink class="link-without-color hover-color" :to="'/profile/?id='+String(showDomainOrFullAddress)">{{showDomainOrAddressOrAnon}}</NuxtLink>
-        <span v-if="$config.showFeatures.friendKeys && getModechatName"> · <NuxtLink class="link-without-color hover-color" :to="'/keys/?username='+getModechatName"><i class="bi bi-key-fill"></i></NuxtLink></span>
+        <span v-if="$config.showFeatures.friendKeys && getChatName"> · <NuxtLink class="link-without-color hover-color" :to="'/keys/?username='+getChatName"><i class="bi bi-key-fill"></i></NuxtLink></span>
         <span v-if="post.timestamp"> · <NuxtLink class="link-without-color hover-color" :to="'/post/?id='+post.stream_id">{{timeSince}}</NuxtLink></span>
       </p>
 
@@ -279,7 +279,7 @@ export default {
       return null;
     },
 
-    getModechatName() {
+    getChatName() {
       if (this.authorDomain) {
         if (this.authorDomain.endsWith(this.$config.tldName)) {
           return this.authorDomain.replace(this.$config.tldName, "");

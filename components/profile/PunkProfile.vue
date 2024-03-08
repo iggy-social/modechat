@@ -33,9 +33,9 @@
               {{ balanceAp }} AP
             </p>
 
-            <p class="me-4" v-if="$config.keysAddress && $config.showFeatures.friendKeys && getModechatName">
+            <p class="me-4" v-if="$config.keysAddress && $config.showFeatures.friendKeys && getChatName">
               <i class="bi bi-key-fill me-2"></i>
-              <NuxtLink class="body-color hover-color" :to="'/keys/?username='+getModechatName">Get Friend Key</NuxtLink>
+              <NuxtLink class="body-color hover-color" :to="'/keys/?username='+getChatName">Get Friend Key</NuxtLink>
             </p>
 
             <p class="me-4">
@@ -337,7 +337,7 @@ export default {
       }
     },
 
-    getModechatName() {
+    getChatName() {
       if (this.domain) {
         if (this.domain.endsWith(this.$config.tldName)) {
           return this.domain.replace(this.$config.tldName, "");
