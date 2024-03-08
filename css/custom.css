@@ -125,6 +125,10 @@ a:hover {
   background-color: var(--bs-mode) !important;
 }
 
+.body-color {
+  color: var(--bs-body-color);
+}
+
 .btn:disabled, .btn.disabled {
   --bs-btn-border-color: var(--bs-primary);
   --bs-btn-disabled-border-color: var(--bs-primary);
