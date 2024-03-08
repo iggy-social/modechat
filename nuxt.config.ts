@@ -117,7 +117,7 @@ export default defineNuxtConfig({
       showFeatures: { // show/hide features in sidebars (if you have too many "true", make the sidebar scrollable --> sidebarLeftSticky: false)
         "activityPoints": true, 
         "airdrop": false, 
-        "friendKeys": false, 
+        "friendKeys": true, 
         "governance": false,
         "newsletter": false, 
         "nftLaunchpad": false, 

@@ -22,6 +22,9 @@
         </div>
       </div>
 
+      <!-- Keys list -->
+      <KeysListWidget v-if="$config.keysAddress && $config.showFeatures.friendKeys" />
+
       <!-- Swap tokens -->
       <SimpleSwapWidget 
         v-if="$config.swapRouterAddress && $config.showFeatures.swap" 
@@ -40,10 +43,6 @@
           <iframe style="border-radius:12px" :src="'https://open.spotify.com/embed/playlist/'+$config.spotifyPlaylistId+'?utm_source=generator&theme=0'" width="100%" height="352" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
         </div>
       </div>
-
-      <!-- Keys list 
-      <KeysListWidget v-if="$config.keysAddress && $config.showFeatures.friendKeys" />
-      -->
 
       <!-- Random minted post(s) -->
       <MintedPostsWidget v-if="$config.showFeatures.randomMintedPosts" @closeRightSidebar="closeRightSidebar" />

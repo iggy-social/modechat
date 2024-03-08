@@ -242,6 +242,10 @@ export default {
     KeysList
   },
 
+  mounted() {
+    this.domainName = this.$route.query.username;
+  },
+
   computed: {
     buyKeyPrice() {
       if (this.buyKeyPriceWei) {

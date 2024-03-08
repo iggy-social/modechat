@@ -91,6 +91,13 @@
             </NuxtLink>
           </li>
 
+          <!-- Friend Keys -->
+          <li class="nav-item p-1" @click="closeLeftSidebar" v-if="$config.keysAddress && $config.showFeatures.friendKeys">
+            <NuxtLink class="nav-link" :class="$route.path.startsWith('/keys') ? 'active' : ''" aria-current="page" to="/keys">
+              <i class="bi bi-key"></i> Friend Keys
+            </NuxtLink>
+          </li>
+
           <!-- Notifications -->
           <li v-if="isActivated" class="nav-item p-1" @click="closeLeftSidebar">
             <NuxtLink class="nav-link" :class="$route.path.startsWith('/notifications') ? 'active' : ''" aria-current="page" to="/notifications">
@@ -152,13 +159,6 @@
           <li class="nav-item p-1" @click="closeLeftSidebar" v-if="$config.swapRouterAddress && $config.showFeatures.swap">
             <NuxtLink class="nav-link" :class="$route.path.startsWith('/swap') ? 'active' : ''" aria-current="page" to="/swap">
               <i class="bi bi-arrow-down-up"></i> Swap
-            </NuxtLink>
-          </li>
-          
-          <!-- Friend Keys -->
-          <li class="nav-item p-1" @click="closeLeftSidebar" v-if="$config.keysAddress && $config.showFeatures.friendKeys">
-            <NuxtLink class="nav-link" :class="$route.path.startsWith('/keys') ? 'active' : ''" aria-current="page" to="/keys">
-              <i class="bi bi-key"></i> Friend Keys
             </NuxtLink>
           </li>
 
