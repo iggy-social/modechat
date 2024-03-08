@@ -273,6 +273,12 @@ export default {
       return null;
     },
 
+    getQueryUsername() {
+      if (!this.$route.query.username) return null;
+
+      return this.$route.query.username;
+    },
+
     sellKeyPrice() {
       if (this.sellKeyPriceWei) {
         const kPrice = Number(ethers.utils.formatEther(this.sellKeyPriceWei));
@@ -577,6 +583,10 @@ export default {
       this.buyKeyToChat = false;
       this.buyKeyPriceWei = null;
       this.sellKeyPriceWei = null;
+    },
+
+    getQueryUsername: function (val) {
+      this.domainName = val;
     }
   }
 }
