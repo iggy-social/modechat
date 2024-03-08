@@ -81,7 +81,7 @@ export default defineNuxtConfig({
       imagekitPublicKey: process.env.IMAGEKIT_PUBLIC_KEY,
       ipfsGateway: "https://cloudflare-ipfs.com/ipfs/",
       keysAddress: "0xD48e9b2D25CEe123be1d01c09645A0a355174db0", // FriendKeys contract address 
-      keysFeatured: ["tempe", "tekr"],
+      keysFeatured: ["tempe", "tekr", "quadshock", "moutcrypto"],
       linkPreviews: process.env.LINK_PREVIEW_SERVICE || "netlify", // "netlify", "vercel", or "microlink" (or leave empty for no link previews)
       lpTokenAddress: "", // liquidity pool token (token to stake in the staking contract)
       lpTokenSymbol: "LP tokens", // LP token symbol
