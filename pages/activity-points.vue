@@ -43,6 +43,7 @@
           <li>Mint posts</li>
           <li>Invite others to {{ $config.projectName }} using referral links</li>
           <li v-if="$config.showFeatures.nftLaunchpad">Launch and mint NFTs via the NFT Launchpad</li>
+          <li>Buy friend keys</li>
           <li>Other kinds of earning APs are coming soon, stay tuned!</li>
         </ul>
       </div>
