@@ -120,7 +120,7 @@ export default defineNuxtConfig({
         "friendKeys": true, 
         "governance": false,
         "newsletter": false, 
-        "nftLaunchpad": false, 
+        "nftLaunchpad": true, 
         "randomMintedPosts": true, 
         "swap": true, 
         "stake": false, 
