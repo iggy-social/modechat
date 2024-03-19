@@ -256,8 +256,8 @@ export default {
   computed: {
     getUsernameOrFullAddress() {
       if (this.cAuthorDomain) {
-        let cleanName = String(this.cAuthorDomain).replace(this.$config.tldName, "");
-        return getTextWithoutBlankCharacters(cleanName) + this.$config.tldName;
+        //let cleanName = String(this.cAuthorDomain).replace(this.$config.tldName, "");
+        return getTextWithoutBlankCharacters(this.cAuthorDomain);
       } else {
         return this.cAuthorAddress;
       }
@@ -266,8 +266,8 @@ export default {
     getUsernameOrShortAddress() {
       if (this.cAuthorAddress) {
         if (this.cAuthorDomain) {
-          let cleanName = String(this.cAuthorDomain).replace(this.$config.tldName, "");
-          return getTextWithoutBlankCharacters(cleanName) + this.$config.tldName;
+          //let cleanName = String(this.cAuthorDomain).replace(this.$config.tldName, "");
+          return getTextWithoutBlankCharacters(this.cAuthorDomain);
         } else {
           return shortenAddress(this.cAuthorAddress);
         }
