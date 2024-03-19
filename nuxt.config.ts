@@ -91,7 +91,7 @@ export default defineNuxtConfig({
       newsletterLink: "https://paragraph.xyz/@iggy?modal=subscribe",
       nftDefaultRatio: 1, // default ratio for the NFT price bonding curve
       nftLaunchpadBondingAddress: "0x305912c0d03C22e6eB7D37E06A47ab899e48B9Af", // NFT launchpad with bonding curve contract address
-      nftLaunchpadLatestItems: 4, // number of latest NFTs to show in the NFT launchpad
+      nftLaunchpadLatestItems: 8, // number of latest NFTs to show in the NFT launchpad
       orbisTest: false, // if true, test context will be used instead of the production one
       orbisTestContext: "kjzl6cwe1jw145tfqv2eqv8tiz6puo27meyz4smz40atppuc13tulqca87k35z2", // test context
       previewImage: "/img/covers/cover.png",
