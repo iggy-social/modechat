@@ -67,13 +67,6 @@
               <small class="text-center mb-3 text-muted">Zerion</small>
             </div> 
 
-            <!--
-            <div class="card col-6 cursor-pointer wallet-img-wrapper" @click="connectWalletConnect">
-              <img src="@/assets/img/wallets/wc.png" class="card-img-top card-img-wallet" alt="Wallet Connect">
-              <small class="text-center mb-3 text-muted">Rabby</small>
-            </div>
-            -->
-
             <div class="card col-6 cursor-pointer wallet-img-wrapper" @click="connectCoinbase">
               <img src="@/assets/img/wallets/coinbase.png" class="card-img-top card-img-wallet" alt="Coinbase">
               <small class="text-center mb-3 text-muted">Coinbase</small>
@@ -83,23 +76,6 @@
               <img src="@/assets/img/wallets/brave.png" class="card-img-top card-img-wallet" alt="Brave">
               <small class="text-center mb-3 text-muted">Brave</small>
             </div>
-
-            <!--
-            <div class="card col-6 cursor-pointer wallet-img-wrapper" @click="connectWalletConnect">
-              <img src="@/assets/img/wallets/minerva.png" class="card-img-top card-img-wallet" alt="Minerva">
-              <small class="text-center mb-3 text-muted">Minerva</small>
-            </div>
-
-            <div class="card col-6 cursor-pointer wallet-img-wrapper" @click="connectWalletConnect">
-              <img src="@/assets/img/wallets/argent.png" class="card-img-top card-img-wallet" alt="Argent">
-              <small class="text-center mb-3 text-muted">Argent</small>
-            </div>
-
-            <div class="card col-6 cursor-pointer wallet-img-wrapper" @click="connectWalletConnect">
-              <img src="@/assets/img/wallets/1inch.png" class="card-img-top card-img-wallet" alt="1inch">
-              <small class="text-center mb-3 text-muted">1inch</small>
-            </div>
-            -->
 
             <div class="card col-6 cursor-pointer wallet-img-wrapper" @click="connectMetaMask">
               <img src="@/assets/img/wallets/trust.png" class="card-img-top card-img-wallet" alt="Trust Wallet">
@@ -136,7 +112,7 @@
 
 <script>
 import { ethers } from 'ethers';
-import { MetaMaskConnector, WalletConnectConnector, CoinbaseWalletConnector, useEthers, useWallet } from 'vue-dapp';
+import { MetaMaskConnector, CoinbaseWalletConnector, useEthers, useWallet } from 'vue-dapp';
 import { useNotificationsStore } from '~/store/notifications';
 import { useSidebarStore } from '~/store/sidebars';
 import { useSiteStore } from '~/store/site';
@@ -148,7 +124,6 @@ import SidebarRight from "~/components/sidebars/SidebarRight.vue";
 import ChatSettingsModal from "~/components/ChatSettingsModal.vue";
 import { getActivityPoints } from '~/utils/balanceUtils';
 import { getAltDomainName, getDomainHolder, getDomainName } from '~/utils/domainUtils';
-import { getRpcs } from "~/utils/rpcUtils";
 import { storeAltname, storeReferrer, storeUsername } from '~/utils/storageUtils';
 import VerifyAccountOwnership from '~/components/VerifyAccountOwnership.vue';
 import ReferralModal from '~/components/referrals/ReferralModal.vue';
@@ -208,8 +183,6 @@ export default {
     if (!this.isActivated) {
 			if (localStorage.getItem("connected") == "metamask") {
 				this.connectMetaMask();
-			} else if (localStorage.getItem("connected") == "walletconnect") {
-				this.connectWalletConnect();
 			} else if (localStorage.getItem("connected") == "coinbase") {
 				this.connectCoinbase();
 			}
@@ -271,12 +244,6 @@ export default {
 		async connectMetaMask() {
 			await this.connectWith(this.mmConnector);
 			localStorage.setItem("connected", "metamask"); // store in local storage to autoconnect next time
-			document.getElementById('closeConnectModal').click();
-		},
-
-		async connectWalletConnect() {
-			await this.connectWith(this.wcConnector);
-			localStorage.setItem("connected", "walletconnect"); // store in local storage to autoconnect next time
 			document.getElementById('closeConnectModal').click();
 		},
 
@@ -465,25 +432,18 @@ export default {
     const { address, chainId, isActivated, signer } = useEthers();
     const { connectWith } = useWallet();
 
-    //const localStorageConnected = useLocalStorage('connected', null); // when localStorageConnected.value is updated, localStorage is updated too
-
     const coinbaseConnector = new CoinbaseWalletConnector({
 			appName: config.projectName,
-			jsonRpcUrl: getRpcs()[String(config.supportedChainId)],
+			jsonRpcUrl: config.rpcCustom,
 		});
 
 		const mmConnector = new MetaMaskConnector({
 			appUrl: config.projectUrl,
 		});
-
-		const wcConnector = new WalletConnectConnector({
-			qrcode: true,
-			rpc: getRpcs(),
-		});
     
     return { 
       address, chainId, coinbaseConnector, connectWith, isActivated, mmConnector, signer, 
-      notificationsStore, sidebarStore, siteStore, userStore, wcConnector 
+      notificationsStore, sidebarStore, siteStore, userStore 
     }
   },
 
