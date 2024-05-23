@@ -3,11 +3,11 @@
   <div id="sidebar2" class="collapse collapse-horizontal" :class="{ show: sidebarStore.showRightSidebar }">
     <div id="sidebar-nav" class="list-group border-0 rounded-0 text-sm-start min-vh-100">
 
-      <!-- Mint/register a domain name 
+      <!-- Mint/register a domain name -->
       <NameMintWidget />
-      -->
+      
 
-      <!-- Register a domain name (alt) -->
+      <!-- Register a domain name (alt) 
       <div class="card m-2 bg-light">
         <div class="card-header bg-light">Get a username</div>
         <div class="card-body sidebar-card-body">
@@ -21,6 +21,7 @@
           </ul>
         </div>
       </div>
+      -->
 
       <!-- Keys list 
       <KeysListWidget v-if="$config.keysAddress && $config.showFeatures.friendKeys" />
