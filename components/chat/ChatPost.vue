@@ -58,7 +58,7 @@
         
           <div class="card col-md-6">
             <NuxtLink :to="'/nft/collection?id='+collection.address" class="text-decoration-none text-reset">
-              <img :src="collection?.image" class="card-img-top" />
+              <Image :url="collection?.image" :alt="collection?.name" cls="card-img-top" />
 
               <div class="card-body bg-body rounded-bottom-3 border-end border-bottom border-start">
                 <h5 class="card-title text-break">{{ collection?.name }}</h5>
@@ -175,6 +175,7 @@ import sanitizeHtml from 'sanitize-html';
 import { useEthers, shortenAddress } from 'vue-dapp';
 import { useToast } from "vue-toastification/dist/index.mjs";
 import { useUserStore } from '~/store/user';
+import Image from "~/components/Image.vue";
 import ProfileImage from "~/components/profile/ProfileImage.vue";
 import IggyPostMint from "~/components/minted-posts/IggyPostMint.vue";
 import MintedPostImage from '~/components/minted-posts/MintedPostImage.vue';
@@ -194,6 +195,7 @@ export default {
   components: {
     ChatQuote,
     IggyPostMint,
+    Image,
     MintedPostImage,
     ProfileImage
   },
