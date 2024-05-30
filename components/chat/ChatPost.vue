@@ -58,7 +58,7 @@
         
           <div class="card col-md-6">
             <NuxtLink :to="'/nft/collection?id='+collection.address" class="text-decoration-none text-reset">
-              <Image :url="collection?.image" :alt="collection?.name" cls="card-img-top" />
+              <Image :url="collection?.image" :alt="collection?.name" cls="card-img-top preview-card-img" />
 
               <div class="card-body bg-body rounded-bottom-3 border-end border-bottom border-start">
                 <h5 class="card-title text-break">{{ collection?.name }}</h5>
