@@ -77,7 +77,7 @@
       <div v-if="cImage" class="mb-4">
         <Image :url="cImage" alt="Image" cls="img-thumbnail img-fluid" style="max-width: 100px" />
         <br />
-        <small>If image didn't appear above, then something is wrong with the link you added (wait until the loading indicator completes).</small>
+        <small>If image didn't appear above, then something is wrong with the link you added (wait until the loading indicator completes). If you have an IPFS link, it also helps to cut/paste the same link a couple of times.</small>
       </div>
 
       <!-- Description -->
@@ -91,7 +91,7 @@
         <div id="cDescriptionHelp" class="form-text">Too long description means higher gas cost for storing it.</div>
       </div>
 
-      <!-- NFT Name -->
+      <!-- NFT Name 
       <div class="mb-4">
         <label for="nftName" class="form-label">NFT Name (can be changed later)</label>
         <input 
@@ -101,6 +101,7 @@
         />
         <div v-if="nftName" id="nftNameHelp" class="form-text">The first minted NFTs will be {{ nftName }} #1, {{ nftName }} #2, {{ nftName }} #3 etc.</div>
       </div>
+      -->
 
       <!-- Unique ID -->
       <div class="mb-4">
@@ -246,7 +247,7 @@ export default {
     },
 
     fieldsValid() {
-      return this.cName && this.cSymbol && this.cImage && this.cDescription && this.nftName && this.ratio;
+      return this.cName && this.cSymbol && this.cImage && this.cDescription && this.ratio;
     },
   },
 
@@ -291,7 +292,7 @@ export default {
             fetchReferrer(window), // referrer
             this.cleanDescription, // collection description
             this.cImage, // collection image
-            this.nftName, // NFT name
+            this.cName, // NFT name
             this.cName, // collection name
             this.cSymbol, // collection symbol
             this.uniqueId, // unique ID to easily find the NFT contract address

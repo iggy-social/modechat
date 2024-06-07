@@ -79,8 +79,8 @@ export default defineNuxtConfig({
       iggyPostStatsAddress: "0x2D4144B4E00cf1dC1c4DeDa37cb1CaCEda030998",
       imagekitEndpoint: process.env.IMAGEKIT_ENDPOINT,
       imagekitPublicKey: process.env.IMAGEKIT_PUBLIC_KEY,
-      ipfsGateway: "https://cloudflare-ipfs.com/ipfs/", 
-      ipfsGateway2: "https://ipfs.io/ipfs/", 
+      ipfsGateway: "https://ipfs.io/ipfs/", 
+      ipfsGateway2: "https://cloudflare-ipfs.com/ipfs/", 
       ipfsGateway3: "https://nftdegeniggy.myfilebase.com/ipfs/",
       keysAddress: "0xD48e9b2D25CEe123be1d01c09645A0a355174db0", // FriendKeys contract address 
       keysFeatured: ["tempe", "tekr", "quadshock", "moutcrypto", "inukun"],
