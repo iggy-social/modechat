@@ -160,7 +160,7 @@
         @processFileUrl="insertImage"
         title="Upload your NFT image"
         infoText="Upload the NFT image."
-        storageType="imagekit"
+        storageType="arweave"
         :componentId="$.uid"
         :maxFileSize="$config.fileUploadSizeLimit"
       />

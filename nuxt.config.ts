@@ -54,6 +54,7 @@ export default defineNuxtConfig({
       airdropApAddress: "", // chat token claim for APs
       airdropClaimDomainsAddress: "", // chat token claim for domain holders
       altDomain: ".mode", // alternative domain (e.g. .eth, .crypto, etc.)
+      arweaveGateway: 'https://arweave.net/',
       blockExplorerBaseUrl: "https://explorer.mode.network", // no trailing slash!
       chatChannels: { // go to Orbis Dashboard (https://useorbis.com/dashboard), create a new Project and then create a new Context for each of the channels below
         "general": "kjzl6cwe1jw149v2ugvw3kux2bllw3bka0vl2rzgmdkaceg3srm62nww7iuvkwi", // general discussion channel
@@ -69,7 +70,7 @@ export default defineNuxtConfig({
       expiryCollections: 1000 * 60 * 60 * 24 * 7, // must be in milliseconds (0 means no expiration)
       expiryUsernames: 1000 * 60 * 60 * 24 * 7, // must be in milliseconds (0 means no expiration)
       favicon: "/img/favicon.svg",
-      fileUploadEnabled: true, // enable/disable file uploads (enable only if external file storage is used, e.g. IPFS via ThirdWeb)
+      fileUploadEnabled: true, // enable/disable file uploads (enable only if external file storage is used, e.g. Arweave)
       fileUploadSizeLimit: 1 * 1024 * 1024, // max file upload size in bytes (1 * 1024 * 1024 = 1 MB)
       fileUploadTokenService: process.env.FILE_UPLOAD_SERVICE || "netlify", // "netlify" or "vercel" (or leave empty for no file uploads)
       getPostsLimit: 30, // number of posts to fetch from Orbis in the getPosts() function
@@ -138,7 +139,6 @@ export default defineNuxtConfig({
       swapPriceImpactMaxBps: 1000, // max price impact in bips (1 bps = 0.01%, 1000bps = 10%) for the swap function
       swapRouterAddress: "0x8FF82d2b0ab704Ba2AB5a567f32F1447A6158260", // iggy swap router contract address
       tenorApiKey: process.env.TENOR_KEY || "",
-      thirdwebClientId: process.env.THIRDWEB_CLIENT_ID || "",
       tldName: ".modechat",
       tokenAddress: null, // leave null if it's a native token of the chain
       tokenDecimals: 18,
