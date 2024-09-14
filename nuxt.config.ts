@@ -54,7 +54,9 @@ export default defineNuxtConfig({
       airdropApAddress: "", // chat token claim for APs
       airdropClaimDomainsAddress: "", // chat token claim for domain holders
       altDomain: ".mode", // alternative domain (e.g. .eth, .crypto, etc.)
+      arweaveAddress: process.env.ARWEAVE_ADDRESS,
       arweaveGateway: 'https://arweave.net/',
+      arweaveMinBalance: 0.02, // minimum AR balance to upload files
       blockExplorerBaseUrl: "https://explorer.mode.network", // no trailing slash!
       chatChannels: { // go to Orbis Dashboard (https://useorbis.com/dashboard), create a new Project and then create a new Context for each of the channels below
         "general": "kjzl6cwe1jw149v2ugvw3kux2bllw3bka0vl2rzgmdkaceg3srm62nww7iuvkwi", // general discussion channel
@@ -72,6 +74,7 @@ export default defineNuxtConfig({
       favicon: "/img/favicon.svg",
       fileUploadEnabled: true, // enable/disable file uploads (enable only if external file storage is used, e.g. Arweave)
       fileUploadSizeLimit: 1 * 1024 * 1024, // max file upload size in bytes (1 * 1024 * 1024 = 1 MB)
+      fileUploadStorageType: "arweave", // "imagekit" or "arweave" (or leave empty for no file uploads)
       fileUploadTokenService: process.env.FILE_UPLOAD_SERVICE || "netlify", // "netlify" or "vercel" (or leave empty for no file uploads)
       getPostsLimit: 30, // number of posts to fetch from Orbis in the getPosts() function
       governanceUrl: "", // governance url (snapshot, Tally, etc.)

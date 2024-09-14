@@ -122,7 +122,7 @@ import NavbarMobile from "~/components/navbars/NavbarMobile.vue";
 import SidebarLeft from "~/components/sidebars/SidebarLeft.vue";
 import SidebarRight from "~/components/sidebars/SidebarRight.vue";
 import ChatSettingsModal from "~/components/ChatSettingsModal.vue";
-import { getActivityPoints } from '~/utils/balanceUtils';
+import { getActivityPoints, getArweaveBalance } from '~/utils/balanceUtils';
 import { getAltDomainName, getDomainHolder, getDomainName } from '~/utils/domainUtils';
 import { storeAltname, storeReferrer, storeUsername } from '~/utils/storageUtils';
 import VerifyAccountOwnership from '~/components/VerifyAccountOwnership.vue';
@@ -193,6 +193,9 @@ export default {
       selector: "[data-bs-toggle='popover']",
     })
 
+    // fetch Arweave balance
+    this.fetchArweaveBalance()
+
     // check if file upload is enabled
     this.siteStore.setFileUploadEnabled(this.$config.fileUploadEnabled);
 
@@ -252,6 +255,15 @@ export default {
         const activityPoints = await this.getActivityPoints(this.address, this.signer);
 
         this.userStore.setCurrentUserActivityPoints(activityPoints);
+      }
+    },
+
+    async fetchArweaveBalance() {
+      if (this.$config.arweaveAddress) {
+        const balance = await getArweaveBalance(this.$config.arweaveAddress)
+        //console.log('Arweave balance:', balance)
+
+        this.siteStore.setArweaveBalance(balance)
       }
     },
 
