@@ -85,7 +85,7 @@ export default defineNuxtConfig({
       imagekitPublicKey: process.env.IMAGEKIT_PUBLIC_KEY,
       ipfsGateway: "https://ipfs.io/ipfs/", 
       ipfsGateway2: "https://cloudflare-ipfs.com/ipfs/", 
-      ipfsGateway3: "https://nftdegeniggy.myfilebase.com/ipfs/",
+      ipfsGateway3: "https://ipfs.filebase.io/ipfs/",
       keysAddress: "0xD48e9b2D25CEe123be1d01c09645A0a355174db0", // FriendKeys contract address 
       keysFeatured: ["tempe", "tekr", "quadshock", "moutcrypto", "inukun"],
       linkPreviews: process.env.LINK_PREVIEW_SERVICE || "netlify", // "netlify", "vercel", or "microlink" (or leave empty for no link previews)
